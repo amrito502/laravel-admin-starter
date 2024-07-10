@@ -1,0 +1,29 @@
+Dashboard
+
+Add User
+Edit User
+Delete User
+
+Role
+Add Role
+Edit Role
+Delete Role
+
+Leave
+Add Leave
+Edit Leave
+Delete Leave
+Show Leave Status
+Edit Leave Status
+
+Employee
+Add Employee
+Edit Employee
+Delete Employee
+
+Depertment
+Add Depertment
+Edit Depertment
+Delete Depertment
+
+Setting

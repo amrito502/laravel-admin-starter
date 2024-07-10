@@ -17,23 +17,24 @@
                             <input type="text" name="name" placeholder="name" id="name" class="form-control mt-2">
                         </div>
 
-                        <div class="form-group mt-3">
-                            <label for="name" class=""><b>Permission</b></label>
-                            <hr class="pb-2">
-
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <p>jiiu</p>
-                                        <hr>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="row ">
-
+                        <div class="row mb-3 mt-5">
+                            <h1><b>All Permission : </b></h1>
+                            <hr class="mb-5">
+                            @foreach ($getPermission as $value)
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-2" style="margin-top: 12px;"><b>{{ $value['name'] }}</b></div>
+                                    <div class="col-md-10">
+                                        @foreach ($value['group'] as $group)
+                                        <div class="mb-3 mt-3">
+                                            <label><input type="checkbox" value="{{ $group['id'] }}" name="permission_id[]" style="margin-right: 6px; cursor: pointer;"><span class="ml-2">{{ $group['name'] }}</span></label> <br>
                                         </div>
-                                        <hr>
+                                        @endforeach
+                                    </div>
                                     </div>
                                 </div>
-                     
+                                <hr>
+                            @endforeach
                         </div>
 
                         <button class="btn btn-success mt-3" type="submit">Submit</button>

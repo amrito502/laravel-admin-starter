@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\RoleModel;
+use App\Models\PermissionModel;
+use App\Models\PermissionRoleModel;
+
 class RoleController extends Controller
 {
     public function list(){
@@ -12,8 +15,9 @@ class RoleController extends Controller
     }
 
     public function add(){
-
-        return view('panel.role.add');
+        $getPermission = PermissionModel::getRecord();
+        $data['getPermission'] = $getPermission;
+        return view('panel.role.add', $data);
     }
 
     public function insert(Request $request){
@@ -21,11 +25,15 @@ class RoleController extends Controller
         $save->name = $request->name;
         $save->save();
 
+        PermissionRoleModel::InsertUpdateRecord($request->permission_id, $save->id);
+
         return redirect()->back()->with('success','Role successfully created!');
     }
 
     public function edit(Request $request,$id){
         $data['getRecord'] = RoleModel::getSingle($id);
+        $data['getPermission']= PermissionModel::getRecord();
+        $data['getRolePermission'] = PermissionRoleModel::getRolePermission($id);
         return view('panel.role.edit',$data);
     }
 
@@ -33,6 +41,8 @@ class RoleController extends Controller
         $save = RoleModel::getSingle($id);
         $save->name = $request->name;
         $save->save();
+        
+        PermissionRoleModel::InsertUpdateRecord($request->permission_id, $save->id);
 
         return redirect()->back()->with('success','Role successfully updated!');
     }
